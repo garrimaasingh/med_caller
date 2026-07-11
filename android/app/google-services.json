@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "334921658779",
+    "firebase_url": "https://medcaller-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "medcaller",
+    "storage_bucket": "medcaller.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334921658779:android:a03c03ec0e52f93162f13e",
+        "android_client_info": {
+          "package_name": "com.gojo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhH46OlLGmcPcu42LgZVs5guEVGluuubg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clinical Admin Portal — MedCaller</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════ LOGIN ═══════════════════ -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="login-logo">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#0D4F4F"/><path d="M18 8v20M10 18h16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h1>MedCaller</h1>
+          <p>Clinical Admin Portal</p>
+        </div>
+      </div>
+      <form id="loginForm">
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="loginEmail" placeholder="admin@medcaller.com" required />
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter password" required />
+        </div>
+        <div id="loginError" class="error-msg hidden"></div>
+        <button type="submit" class="btn-primary" id="loginBtn">
+          <span>Sign In</span>
+          <div class="btn-loader hidden"><div class="spinner"></div></div>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ APP ═══════════════════ -->
+  <div id="appScreen" class="app-screen hidden">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#0D4F4F"/><path d="M18 8v20M10 18h16" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div>
+          <span class="brand-name">Admin Console</span>
+          <span class="brand-ver">Health Systems v2.4</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-link active" data-page="overview" onclick="go('overview')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Overview
+        </a>
+        <a class="nav-link" data-page="doctors" onclick="go('doctors')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Doctors
+        </a>
+        <a class="nav-link" data-page="patients" onclick="go('patients')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Patients
+        </a>
+        <a class="nav-link" data-page="pending" onclick="go('pending')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          Pending Requests
+          <span class="nav-badge" id="pendingBadge">0</span>
+        </a>
+        <a class="nav-link" data-page="aisettings" onclick="go('aisettings')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          AI Settings
+        </a>
+        <a class="nav-link" data-page="billing" onclick="go('billing')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Billing
+        </a>
+        <a class="nav-link" data-page="security" onclick="go('security')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Security
+        </a>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="btn-generate" onclick="generateReport()">Generate Report</button>
+        <a class="nav-link bottom-link" onclick="logout()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Logout
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Area -->
+    <div class="main-area">
+
+      <!-- Top Bar -->
+      <header class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-tabs">
+          <a class="tab-link" data-page="overview" onclick="go('overview')">Overview</a>
+          <a class="tab-link active" data-page="doctors" onclick="go('doctors')">Doctors</a>
+          <a class="tab-link" data-page="patients" onclick="go('patients')">Patients</a>
+          <a class="tab-link" data-page="pending" onclick="go('pending')">Pending Requests</a>
+        </div>
+        <div class="topbar-right">
+          <div class="search-bar">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="globalSearch" placeholder="Search provider..." />
+          </div>
+          <button class="topbar-icon" title="Notifications"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>
+          <button class="topbar-icon" title="Settings"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg></button>
+          <div class="avatar-circle" title="Admin">A</div>
+        </div>
+      </header>
+
+      <!-- Content Pages -->
+      <div class="content-scroll">
+
+        <!-- ═══ OVERVIEW ═══ -->
+        <div id="page-overview" class="page active">
+          <div class="page-header">
+            <div>
+              <h1>Dashboard Overview</h1>
+              <p>Monitoring Clinical Hub v2.4 infrastructure and neural models.</p>
+            </div>
+            <span class="live-dot"><span class="dot-pulse"></span> Live Dashboard</span>
+          </div>
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-icon teal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="stat-body">
+                <span class="stat-label">Total Providers</span>
+                <span class="stat-val" id="ovProviders">142</span>
+                <span class="stat-delta up">+12% vs LY</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg></div>
+              <div class="stat-body">
+                <span class="stat-label">AI Adoption</span>
+                <span class="stat-val" id="ovAdoption">88.4%</span>
+                <span class="stat-badge green">Optimal</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon amber"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
+              <div class="stat-body">
+                <span class="stat-label">Pending Requests</span>
+                <span class="stat-val" id="ovPending">12</span>
+                <span class="stat-badge amber">Action Required</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <div class="stat-body">
+                <span class="stat-label">Avg Tokens/Mo</span>
+                <span class="stat-val" id="ovTokens">420k</span>
+                <span class="stat-badge blue">High Utilization</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- System Health -->
+          <div class="health-row">
+            <div class="health-card">
+              <h3>System Health</h3>
+              <p class="health-desc">Provider nodes and AI endpoints are operating at peak efficiency.</p>
+              <div class="health-meter">
+                <span class="health-val">42ms</span>
+                <span class="health-label">API Latency</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill teal" style="width:85%"></div></div>
+              <button class="btn-outline-sm" onclick="runDiagnostics()">Run Diagnostics</button>
+            </div>
+            <div class="health-card wide">
+              <h3>Global Permissions</h3>
+              <div class="perm-grid">
+                <div class="perm-item">
+                  <div class="perm-info">
+                    <strong>AI Diagnostics Support</strong>
+                    <p>Allow providers to use LLM-based differential diagnosis suggestions.</p>
+                  </div>
+                  <label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label>
+                  <span class="toggle-label">Enabled</span>
+                </div>
+                <div class="perm-item">
+                  <div class="perm-info">
+                    <strong>Auto-Transcription</strong>
+                    <p>Automatically generate patient encounter notes from recorded calls.</p>
+                  </div>
+                  <label class="toggle"><input type="checkbox" checked /><span class="slider"></span></label>
+                  <span class="toggle-label">Enabled</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ DOCTORS ═══ -->
+        <div id="page-doctors" class="page">
+          <div class="page-header">
+            <div>
+              <h1>Doctor Management</h1>
+              <p>Review clinical performance, manage AI permissions, and monitor active status.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn-outline" onclick="filterDoctors()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                Filters
+              </button>
+              <button class="btn-teal" onclick="openOnboardModal()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                Onboard New Doctor
+              </button>
+            </div>
+          </div>
+          <div class="table-card">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Provider</th>
+                  <th>Specialization</th>
+                  <th>Status</th>
+                  <th>AI Credits Used</th>
+                  <th>Performance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="doctorsBody">
+                <tr><td colspan="6" class="empty-cell">Loading doctors...</td></tr>
+              </tbody>
+            </table>
+            <div class="table-footer">
+              <span id="doctorCount">Showing 0 providers</span>
+              <div class="pagination" id="doctorPagination"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══ PATIENTS ═══ -->
+        <div id="page-patients" class="page">
+          <div class="page-header">
+            <div>
+              <h1>Patient Registry</h1>
+              <p>Manage and view all registered patients in the system.</p>
+            </div>
+          </div>
+          <div class="table-card">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Patient</th>
+                  <th>Phone</th>
+                  <th>Last Visit</th>
+                  <th>AI Summaries</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="patientsBody">
+                <tr><td colspan="5" class="empty-cell">No patients registered yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ═══ PENDING REQUESTS ═══ -->
+        <div id="page-pending" class="page">
+          <div class="page-header">
+            <div>
+              <h1>Pending Requests</h1>
+              <p>Review and approve or reject new doctor registrations.</p>
+            </div>
+            <button class="btn-outline" onclick="loadPending()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Refresh
+            </button>
+          </div>
+          <div class="table-card">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Provider</th>
+                  <th>Specialization</th>
+                  <th>Status</th>
+                  <th>Certificate</th>
+                  <th>Performance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="pendingBody">
+                <tr><td colspan="6" class="empty-cell">Loading pending requests...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ═══ AI SETTINGS ═══ -->
+        <div id="page-aisettings" class="page">
+          <div class="page-header">
+            <div>
+              <div class="tag-row"><span class="tag teal">Active Deployment</span></div>
+              <h1>AI Orchestration Settings</h1>
+              <p>Configure the clinical intelligence layer. Adjust models, API credentials, and inference parameters for diagnostic assistance.</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn-outline">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                View Audit Log
+              </button>
+              <button class="btn-teal" onclick="saveAiSettings()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save All Changes
+              </button>
+            </div>
+          </div>
+
+          <div class="ai-grid">
+            <!-- API Credentials -->
+            <div class="card">
+              <div class="card-head">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                <div>
+                  <h3>API Credentials</h3>
+                  <p class="card-sub">Manage your connection to NVIDIA NIM infrastructure</p>
+                </div>
+              </div>
+              <label class="field-label">NVIDIA API Key</label>
+              <div class="input-group">
+                <span class="input-icon">🔑</span>
+                <input type="password" id="apiKey" placeholder="nvapi-xxxxxxxxxxxx" />
+                <button class="input-action" onclick="toggleKey()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+              </div>
+              <span class="field-hint">Keys are encrypted at rest. Get your key from build.nvidia.com</span>
+
+              <label class="field-label">Active Environment</label>
+              <div class="env-row">
+                <button class="env-btn active" id="envProd">☁️ Production</button>
+                <button class="env-btn" id="envStaging">🔬 Staging</button>
+              </div>
+            </div>
+
+            <!-- Service Status -->
+            <div class="card compact">
+              <div class="status-head">
+                <span class="status-icon">⚡</span>
+                <div>
+                  <span class="field-label">Service Status</span>
+                  <span class="status-green">● Healthy</span>
+                </div>
+              </div>
+              <div class="quota-section">
+                <div class="quota-header">
+                  <span>Token Quota</span>
+                  <span class="quota-pct" id="quotaPct">68%</span>
+                </div>
+                <div class="progress-track"><div class="progress-fill teal" id="quotaBar" style="width:68%"></div></div>
+                <span class="field-hint">2.4M / 4.0M tokens used this billing cycle</span>
+              </div>
+              <div class="mini-stats">
+                <div class="mini-stat"><span class="mini-val" id="avgLatency">142ms</span><span class="mini-label">Avg Latency</span></div>
+                <div class="mini-stat"><span class="mini-val" id="successRate">99.9%</span><span class="mini-label">Success Rate</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Model Selection -->
+          <div class="card">
+            <div class="card-head">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <div>
+                <h3>Intelligence Model Selection</h3>
+                <p class="card-sub">Switch between clinical-grade LLMs for various tasks</p>
+              </div>
+            </div>
+            <div class="model-grid" id="modelGrid">
+              <!-- Rendered by JS -->
+            </div>
+            <button class="add-model-btn" onclick="addNewModel()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <strong>Add New Model</strong>
+              <span>Connect custom NIM or local endpoint</span>
+            </button>
+          </div>
+
+          <!-- Advanced Parameters -->
+          <div class="card">
+            <div class="card-head">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+              <div>
+                <h3>Advanced Parameters</h3>
+                <p class="card-sub">Fine-tune deterministic vs creative outputs for clinical accuracy</p>
+              </div>
+            </div>
+            <div class="params-grid">
+              <div class="param-group">
+                <label class="field-label">Temperature <span class="info-icon" title="Controls randomness">ⓘ</span></label>
+                <input type="range" id="temperature" min="0" max="2" step="0.01" value="0.72" oninput="updateTemp()" />
+                <div class="range-labels"><span>Precise</span><span class="range-val" id="tempVal">0.72</span><span>Creative</span></div>
+              </div>
+              <div class="param-group">
+                <label class="field-label">Max Response Tokens</label>
+                <div class="input-group compact">
+                  <input type="number" id="maxTokens" value="4096" min="256" max="8192" step="256" />
+                  <span class="input-suffix">Tokens</span>
+                </div>
+                <span class="field-hint">Recommended for medical summaries: 2048 - 8192 tokens.</span>
+              </div>
+              <div class="param-group">
+                <label class="field-label">Top P <span class="info-icon" title="Nucleus sampling">ⓘ</span></label>
+                <input type="range" id="topP" min="0" max="1" step="0.01" value="0.90" oninput="updateTopP()" />
+                <div class="range-labels"><span>0</span><span class="range-val" id="topPVal">0.90</span><span>1</span></div>
+              </div>
+              <div class="param-group">
+                <label class="field-label">System Prompt Profile</label>
+                <select id="promptProfile">
+                  <option>Strict Clinical (Default)</option>
+                  <option>Conversational</option>
+                  <option>Research-Focused</option>
+                  <option>Emergency Triage</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- HIPAA Notice -->
+          <div class="hipaa-notice">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div>
+              <strong>HIPAA Compliance & Data Privacy</strong>
+              <p>All model interactions are processed through HIPAA-compliant endpoints. No patient health information (PHI) is used for training the base models by NVIDIA or the portal provider.</p>
+            </div>
+          </div>
+
+          <!-- Audit Log -->
+          <div class="card">
+            <div class="card-head">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <div>
+                <h3>System Audit Log</h3>
+                <p class="card-sub">Recent system events and configuration changes</p>
+              </div>
+              <a class="card-link" style="margin-left:auto;">View All →</a>
+            </div>
+            <div class="audit-list" id="auditLog">
+              <div class="audit-item">
+                <div class="audit-icon teal"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                <div class="audit-body"><strong>Model Switch Triggered</strong><p>User: Admin_X changed active model to Llama 3.1</p></div>
+                <span class="audit-time">2 mins ago</span>
+              </div>
+              <div class="audit-item">
+                <div class="audit-icon amber"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <div class="audit-body"><strong>API Timeout Warning</strong><p>Spike in latency detected (120ms) on Edge Node EU-West</p></div>
+                <span class="audit-time">15 mins ago</span>
+              </div>
+              <div class="audit-item">
+                <div class="audit-icon green"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+                <div class="audit-body"><strong>Automatic Backup Complete</strong><p>System state encrypted and synced to secure storage</p></div>
+                <span class="audit-time">1 hr ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Banner -->
+          <div class="hero-banner">
+            <h2>Augmenting the future of healthcare.</h2>
+            <p>Configuring the clinical mind to assist every practitioner, everywhere.</p>
+          </div>
+        </div>
+
+        <!-- ═══ BILLING ═══ -->
+        <div id="page-billing" class="page">
+          <div class="page-header"><div><h1>Billing</h1><p>Manage subscription and usage billing.</p></div></div>
+          <div class="card"><div class="empty-state">Billing features coming soon.</div></div>
+        </div>
+
+        <!-- ═══ SECURITY ═══ -->
+        <div id="page-security" class="page">
+          <div class="page-header"><div><h1>Security</h1><p>Manage security settings and access controls.</p></div></div>
+          <div class="card"><div class="empty-state">Security features coming soon.</div></div>
+        </div>
+
+      </div><!-- /content-scroll -->
+    </div><!-- /main-area -->
+  </div><!-- /app-screen -->
+
+  <!-- ═══ MODALS ═══ -->
+  <div id="approveModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-head"><h3>Approve Doctor</h3><button class="close-btn" onclick="closeModal('approveModal')">&times;</button></div>
+      <div class="modal-body">
+        <p>Are you sure you want to approve <strong id="approveName"></strong>?</p>
+        <div class="preview-grid" id="approvePreview"></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-outline" onclick="closeModal('approveModal')">Cancel</button>
+        <button class="btn-green" id="confirmApproveBtn" onclick="confirmApprove()">✓ Approve</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="rejectModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-head"><h3>Reject Doctor</h3><button class="close-btn" onclick="closeModal('rejectModal')">&times;</button></div>
+      <div class="modal-body">
+        <p>Reject <strong id="rejectName"></strong>?</p>
+        <div class="field" style="margin-top:12px"><label>Reason for rejection</label><textarea id="rejectReason" rows="3" placeholder="Enter reason..."></textarea></div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-outline" onclick="closeModal('rejectModal')">Cancel</button>
+        <button class="btn-red" id="confirmRejectBtn" onclick="confirmReject()">✕ Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="detailModal" class="modal-overlay hidden">
+    <div class="modal modal-lg">
+      <div class="modal-head"><h3>Provider Details</h3><button class="close-btn" onclick="closeModal('detailModal')">&times;</button></div>
+      <div class="modal-body" id="detailContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"><span id="toastMsg"></span></div>
+
+  <!-- Custom Model Modal -->
+  <div id="customModelModal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-head"><h3>Add Custom Model</h3><button class="close-btn" onclick="closeCustomModelModal()">&times;</button></div>
+      <div class="modal-body">
+        <div class="field">
+          <label>Model Display Name</label>
+          <input type="text" id="customModelName" placeholder="e.g. GPT-4o Medical" />
+        </div>
+        <div class="field">
+          <label>Model ID (API)</label>
+          <input type="text" id="customModelId" placeholder="e.g. openai/gpt-4o" />
+          <span class="field-hint">Full model ID as used by the NVIDIA API endpoint</span>
+        </div>
+        <div class="field">
+          <label>Description (optional)</label>
+          <textarea id="customModelDesc" rows="2" placeholder="Short description of the model..."></textarea>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-outline" onclick="closeCustomModelModal()">Cancel</button>
+        <button class="btn-teal" onclick="saveCustomModel()">Add Model</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

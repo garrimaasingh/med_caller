@@ -1,0 +1,82 @@
+- generic [ref=f1e21]:
+  - complementary [ref=f1e22]:
+    - generic [ref=f1e23]: MedCaller
+    - navigation [ref=f1e29]:
+      - button "Dashboard" [ref=f1e30] [cursor=pointer]
+      - button "Pending Approvals 5" [active] [ref=f1e37] [cursor=pointer]:
+        - generic [ref=f1e41]: Pending Approvals
+        - generic [ref=f1e42]: "5"
+      - button "All Doctors" [ref=f1e43] [cursor=pointer]
+      - button "AI Settings" [ref=f1e50] [cursor=pointer]
+    - generic [ref=f1e55]:
+      - generic [ref=f1e56]:
+        - generic [ref=f1e57]: A
+        - generic [ref=f1e58]:
+          - generic [ref=f1e59]: Admin
+          - generic [ref=f1e60]: Super Admin
+      - button "Sign Out" [ref=f1e61] [cursor=pointer]
+  - main [ref=f1e65]:
+    - generic [ref=f1e66]:
+      - heading "Pending Approvals" [level=2] [ref=f1e177]
+      - generic [ref=f1e70]: Fri, Jul 10, 2026, 09:30 PM
+    - generic [ref=f1e155]:
+      - generic [ref=f1e156]:
+        - heading "Pending Approvals" [level=3] [ref=f1e157]
+        - button "Refresh" [ref=f1e158] [cursor=pointer]
+      - table [ref=f1e163]:
+        - rowgroup [ref=f1e164]:
+          - row [ref=f1e165]:
+            - columnheader "Doctor" [ref=f1e166]
+            - columnheader "Email" [ref=f1e167]
+            - columnheader "Phone" [ref=f1e168]
+            - columnheader "Specialization" [ref=f1e169]
+            - columnheader "Documents" [ref=f1e170]
+            - columnheader "Registered" [ref=f1e171]
+            - columnheader "Actions" [ref=f1e172]
+        - rowgroup [ref=f1e173]:
+          - row [ref=f1e178]:
+            - cell "RS Dr. Rajesh Sharma" [ref=f1e179]:
+              - generic [ref=f1e180]:
+                - generic [ref=f1e181]: RS
+                - generic [ref=f1e182]: Dr. Rajesh Sharma
+            - cell "rajesh@hospital.com" [ref=f1e183]
+            - cell "+91 98765 43210" [ref=f1e184]
+            - cell "Cardiology" [ref=f1e185]
+            - cell [ref=f1e186]:
+              - link "View Doc" [ref=f1e187] [cursor=pointer]:
+                - /url: "#"
+            - cell "Jul 8, 2026" [ref=f1e188]
+            - cell [ref=f1e189]:
+              - button "View" [ref=f1e190] [cursor=pointer]
+              - button "Approve" [ref=f1e194] [cursor=pointer]
+              - button "Reject" [ref=f1e197] [cursor=pointer]
+          - row [ref=f1e201]:
+            - cell "PA Dr. Priya Agarwal" [ref=f1e202]:
+              - generic [ref=f1e203]:
+                - generic [ref=f1e204]: PA
+                - generic [ref=f1e205]: Dr. Priya Agarwal
+            - cell "priya@clinic.com" [ref=f1e206]
+            - cell "+91 87654 32109" [ref=f1e207]
+            - cell "Dermatology" [ref=f1e208]
+            - cell [ref=f1e209]:
+              - link "View Doc" [ref=f1e210] [cursor=pointer]:
+                - /url: "#"
+            - cell "Jul 9, 2026" [ref=f1e211]
+            - cell [ref=f1e212]:
+              - button "View" [ref=f1e213] [cursor=pointer]
+              - button "Approve" [ref=f1e217] [cursor=pointer]
+              - button "Reject" [ref=f1e220] [cursor=pointer]
+          - row [ref=f1e224]:
+            - cell "VK Dr. Vikram Kumar" [ref=f1e225]:
+              - generic [ref=f1e226]:
+                - generic [ref=f1e227]: VK
+                - generic [ref=f1e228]: Dr. Vikram Kumar
+            - cell "vikram@medgroup.com" [ref=f1e229]
+            - cell "+91 76543 21098" [ref=f1e230]
+            - cell "Orthopedics" [ref=f1e231]
+            - cell "None" [ref=f1e232]
+            - cell "Jul 10, 2026" [ref=f1e233]
+            - cell [ref=f1e234]:
+              - button "View" [ref=f1e235] [cursor=pointer]
+              - button "Approve" [ref=f1e239] [cursor=pointer]
+              - button "Reject" [ref=f1e242] [cursor=pointer]

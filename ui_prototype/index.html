@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Smart Caller Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="presentation-layout">
+    <div class="sidebar">
+      <div class="brand">
+        <i class="fa-solid fa-notes-medical brand-icon"></i>
+        <div>
+          <h1>AI Smart Caller</h1>
+          <p>Homeopathy Assistant</p>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-target="dashboard"><i class="fa-solid fa-chart-pie"></i> 12. Dashboard</button>
+        <button class="nav-btn" data-target="incoming-call-unknown"><i class="fa-solid fa-phone-slash"></i> 1. Unknown Call</button>
+        <button class="nav-btn" data-target="patient-added"><i class="fa-solid fa-check-circle"></i> 2. Patient Added</button>
+        <button class="nav-btn" data-target="incoming-call-known"><i class="fa-solid fa-phone-volume"></i> 3. Identified Call</button>
+        <button class="nav-btn" data-target="call-logs"><i class="fa-solid fa-list-ul"></i> 5. Call Logs</button>
+        <button class="nav-btn" data-target="patient-list"><i class="fa-solid fa-users"></i> 6. Patient List</button>
+        <button class="nav-btn" data-target="patient-profile"><i class="fa-solid fa-user-doctor"></i> 7. Patient Profile</button>
+        <button class="nav-btn" data-target="timeline"><i class="fa-solid fa-timeline"></i> 8. Timeline</button>
+        <button class="nav-btn" data-target="add-patient"><i class="fa-solid fa-user-plus"></i> 9. Add Patient</button>
+        <button class="nav-btn" data-target="ai-notes"><i class="fa-solid fa-robot"></i> 10. AI Notes</button>
+        <button class="nav-btn" data-target="reminders"><i class="fa-regular fa-bell"></i> 11. Reminders</button>
+      </nav>
+    </div>
+
+    <div class="main-content">
+      <div class="device-frame">
+        <div class="notch"></div>
+        <div class="screen-container">
+          
+          <!-- 12. Dashboard -->
+          <div class="screen active" id="dashboard">
+            <div class="app-header">
+              <div class="header-content">
+                <h2>Dashboard</h2>
+                <div class="header-actions">
+                  <span class="dropdown-text">This Week <i class="fa-solid fa-chevron-down text-xs"></i></span>
+                  <i class="fa-solid fa-bars"></i>
+                </div>
+              </div>
+            </div>
+            <div class="screen-content scrollable">
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-icon text-blue"><i class="fa-solid fa-user-doctor"></i></div>
+                  <span class="stat-label">Total Patients</span>
+                  <span class="stat-value">128</span>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon text-green"><i class="fa-solid fa-phone"></i></div>
+                  <span class="stat-label">Calls This Week</span>
+                  <span class="stat-value">48</span>
+                </div>
+                <div class="stat-card warning">
+                  <div class="stat-icon text-yellow"><i class="fa-solid fa-calendar-check"></i></div>
+                  <span class="stat-label">Follow-ups Due</span>
+                  <span class="stat-value">12</span>
+                </div>
+                <div class="stat-card danger">
+                  <div class="stat-icon text-red"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                  <span class="stat-label">Consultations<br>Expired</span>
+                  <span class="stat-value">5</span>
+                </div>
+                <div class="stat-card success-bg">
+                  <div class="stat-icon text-green"><i class="fa-solid fa-heart-circle-check"></i></div>
+                  <span class="stat-label">Recovered<br>Patients</span>
+                  <span class="stat-value text-green">18</span>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-icon text-blue"><i class="fa-solid fa-stethoscope"></i></div>
+                  <span class="stat-label">Active<br>Treatments</span>
+                  <span class="stat-value">76</span>
+                </div>
+              </div>
+
+              <div class="section-title">Patient Status Overview</div>
+              <div class="chart-container">
+                <div class="donut-chart"></div>
+                <div class="chart-legend">
+                  <div class="legend-item"><span class="dot no-improvement"></span> No Improvement (Red)<br><small>15 (16%)</small></div>
+                  <div class="legend-item"><span class="dot improving"></span> Improving (Yellow)<br><small>58 (60%)</small></div>
+                  <div class="legend-item"><span class="dot recovered"></span> Recovered (Green)<br><small>23 (24%)</small></div>
+                </div>
+              </div>
+
+              <div class="section-title">Recent Activities</div>
+              <div class="activity-list">
+                <div class="activity-item">
+                  <img src="https://i.pravatar.cc/150?u=a" alt="Avatar" class="avatar-sm">
+                  <div class="activity-info">
+                    <h4>Rohit Sharma</h4>
+                    <p>Call received & record updated</p>
+                  </div>
+                  <span class="time">10:30 AM</span>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-nav">
+              <div class="nav-item active"><i class="fa-solid fa-house"></i><span>Home</span></div>
+              <div class="nav-item"><i class="fa-solid fa-phone"></i><span>Calls</span></div>
+              <div class="nav-item"><i class="fa-solid fa-users"></i><span>Patients</span></div>
+              <div class="nav-item"><i class="fa-solid fa-robot"></i><span>AI Notes</span></div>
+              <div class="nav-item"><i class="fa-solid fa-bars"></i><span>More</span></div>
+            </div>
+          </div>
+
+          <!-- 1. Incoming Call (Unknown) -->
+          <div class="screen bg-dark-blue call-screen" id="incoming-call-unknown">
+            <div class="call-top-text">Incoming Call</div>
+            <div class="avatar-xxl unknown-avatar mt-4"><i class="fa-solid fa-user"></i></div>
+            <h2 class="caller-number-large mt-4">+91 98765 43210</h2>
+            <div class="caller-country">India</div>
+            
+            <div class="unknown-notice mt-6">
+              <div class="question-mark">?</div>
+              <div class="notice-text">
+                <h3>Unknown Number</h3>
+                <p>Not in your patient list</p>
+              </div>
+            </div>
+
+            <p class="add-prompt mt-6">Do you want to add this<br>number to your patient list?</p>
+
+            <div class="call-actions mt-auto">
+              <div class="action-btn-group">
+                <button class="btn-call reject"><i class="fa-solid fa-xmark"></i></button>
+                <span>Ignore</span>
+              </div>
+              <div class="action-btn-group">
+                <button class="btn-call accept"><i class="fa-solid fa-check"></i></button>
+                <span>Add as Patient</span>
+              </div>
+            </div>
+            
+            <div class="call-bottom-actions mt-6">
+              <button class="btn-call-small reject-solid"><i class="fa-solid fa-phone-slash"></i></button>
+              <button class="btn-call-small accept-solid"><i class="fa-solid fa-phone"></i></button>
+            </div>
+          </div>
+
+          <!-- 2. Patient Added Confirmation -->
+          <div class="screen bg-dark-blue call-screen" id="patient-added">
+            <div class="success-icon-large mt-10">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            
+            <h2 class="success-title mt-6">Patient Added<br>Successfully!</h2>
+            <p class="success-desc mt-4">This number has been saved<br>in your patient list.</p>
+
+            <div class="saved-contact-card mt-8">
+              <div class="avatar-md bg-green text-white">R</div>
+              <div class="contact-info">
+                <h3>Rohit Sharma</h3>
+                <p>+91 98765 43210</p>
+              </div>
+            </div>
+
+            <button class="btn-green-solid full-width mt-6">Open Patient Profile</button>
+            <button class="btn-text-white full-width mt-4">Done</button>
+
+            <div class="call-bottom-actions mt-auto">
+              <button class="btn-call-small reject-solid"><i class="fa-solid fa-phone-slash"></i></button>
+              <button class="btn-call-small accept-solid"><i class="fa-solid fa-phone"></i></button>
+            </div>
+          </div>
+
+          <!-- 3. Existing Patient Call -->
+          <div class="screen bg-medical-green call-screen" id="incoming-call-known">
+            <div class="call-top-text">Incoming Call</div>
+            <img src="https://i.pravatar.cc/150?u=a" alt="Avatar" class="avatar-xxl border-white mt-4">
+            <h2 class="caller-name-large mt-4">Rohit Sharma</h2>
+            <div class="caller-phone-light">+91 98765 43210</div>
+            <div class="status-badge improving-pill mt-3"><span class="dot-small yellow"></span> Improving</div>
+            
+            <div class="call-info-card mt-6">
+              <div class="info-row-grid">
+                <span class="info-label">Health Issue</span>
+                <span class="info-value">Chronic Migraine</span>
+              </div>
+              <div class="info-row-grid">
+                <span class="info-label">Last Visit</span>
+                <span class="info-value">12 Apr 2024</span>
+              </div>
+              <div class="info-row-grid">
+                <span class="info-label">Last Update</span>
+                <span class="info-value">4 Days Ago</span>
+              </div>
+              <div class="info-row-grid">
+                <span class="info-label">Medicine</span>
+                <span class="info-value">Natrum Mur 200</span>
+              </div>
+              <div class="info-row-grid">
+                <span class="info-label">Next Follow-up</span>
+                <span class="info-value">Tomorrow</span>
+              </div>
+              <div class="info-row-grid">
+                <span class="info-label">Consultation Valid Till</span>
+                <span class="info-value text-dark-green fw-600">10 May 2024</span>
+              </div>
+              
+              <div class="divider mt-4 mb-4"></div>
+              <button class="btn-text-green full-width fw-600">View Full Profile</button>
+            </div>
+
+            <div class="call-bottom-actions mt-auto mb-6">
+              <button class="btn-call reject-solid"><i class="fa-solid fa-phone-slash"></i></button>
+              <button class="btn-call accept-solid pulse-green"><i class="fa-solid fa-phone"></i></button>
+            </div>
+          </div>
+
+          <!-- 5. Call Logs -->
+          <div class="screen" id="call-logs">
+            <div class="app-header">
+              <div class="header-content">
+                <div class="flex-align">
+                  <i class="fa-solid fa-arrow-left mr-3"></i>
+                  <h2>Call Logs</h2>
+                </div>
+                <i class="fa-solid fa-filter"></i>
+              </div>
+            </div>
+            <div class="screen-content scrollable">
+              <div class="pill-tabs mb-4">
+                <div class="pill active">All</div>
+                <div class="pill">Patients</div>
+                <div class="pill">Missed</div>
+                <div class="pill">Unknown</div>
+              </div>
+              
+              <div class="date-header">Today</div>
+              
+              <div class="list-item">
+                <img src="https://i.pravatar.cc/150?u=a" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Rohit Sharma</h4>
+                  <p>10:30 AM</p>
+                </div>
+                <div class="right-actions">
+                  <div class="status-badge improving-light">Improving</div>
+                  <i class="fa-solid fa-phone text-green ml-2"></i>
+                </div>
+              </div>
+
+              <div class="list-item">
+                <img src="https://i.pravatar.cc/150?u=b" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Neha Verma</h4>
+                  <p>09:15 AM</p>
+                </div>
+                <div class="right-actions">
+                  <div class="status-badge danger-light">No Improvement</div>
+                  <i class="fa-solid fa-phone text-green ml-2"></i>
+                </div>
+              </div>
+
+              <div class="list-item">
+                <div class="avatar-md bg-gray"><i class="fa-solid fa-user text-gray"></i></div>
+                <div class="item-info">
+                  <h4>+91 98765 43210</h4>
+                  <p class="text-xs text-muted">(Unknown)</p>
+                </div>
+                <div class="right-actions text-right">
+                  <div class="text-xs">08:45 AM</div>
+                  <div class="text-red text-xs fw-600">Missed</div>
+                </div>
+              </div>
+
+              <div class="date-header mt-4">Yesterday</div>
+              
+              <div class="list-item">
+                <img src="https://i.pravatar.cc/150?u=e" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Amit Kumar</h4>
+                  <p>Yesterday</p>
+                </div>
+                <div class="right-actions">
+                  <div class="status-badge improving-light">Improving</div>
+                  <i class="fa-solid fa-phone text-green ml-2"></i>
+                </div>
+              </div>
+
+              <div class="list-item">
+                <img src="https://i.pravatar.cc/150?u=c" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Sunita Devi</h4>
+                  <p>Yesterday</p>
+                </div>
+                <div class="right-actions">
+                  <div class="status-badge success-light">Recovered</div>
+                  <i class="fa-solid fa-phone text-green ml-2"></i>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-nav">
+              <div class="nav-item"><i class="fa-solid fa-house"></i><span>Home</span></div>
+              <div class="nav-item active"><i class="fa-solid fa-phone"></i><span>Calls</span></div>
+              <div class="nav-item"><i class="fa-solid fa-users"></i><span>Patients</span></div>
+              <div class="nav-item"><i class="fa-solid fa-robot"></i><span>AI Notes</span></div>
+              <div class="nav-item"><i class="fa-solid fa-bars"></i><span>More</span></div>
+            </div>
+          </div>
+
+          <!-- 6. Patient List -->
+          <div class="screen" id="patient-list">
+            <div class="app-header">
+              <div class="header-content">
+                <h2>Patients</h2>
+                <div class="fab-small bg-blue"><i class="fa-solid fa-plus text-white"></i></div>
+              </div>
+              <div class="search-bar mt-3">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search patients...">
+              </div>
+            </div>
+            <div class="screen-content scrollable">
+              <div class="list-item no-border">
+                <img src="https://i.pravatar.cc/150?u=a" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Rohit Sharma</h4>
+                  <p>Chronic Migraine</p>
+                </div>
+                <div class="status-badge improving-light">Improving</div>
+              </div>
+              <div class="divider"></div>
+              
+              <div class="list-item no-border">
+                <img src="https://i.pravatar.cc/150?u=b" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Neha Verma</h4>
+                  <p>Skin Allergy</p>
+                </div>
+                <div class="status-badge danger-light">No Improvement</div>
+              </div>
+              <div class="divider"></div>
+
+              <div class="list-item no-border">
+                <img src="https://i.pravatar.cc/150?u=e" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Amit Kumar</h4>
+                  <p>Asthma</p>
+                </div>
+                <div class="status-badge improving-light">Improving</div>
+              </div>
+              <div class="divider"></div>
+
+              <div class="list-item no-border">
+                <img src="https://i.pravatar.cc/150?u=c" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Sunita Devi</h4>
+                  <p>Gastric Problem</p>
+                </div>
+                <div class="status-badge success-light">Recovered</div>
+              </div>
+              <div class="divider"></div>
+
+              <div class="list-item no-border">
+                <img src="https://i.pravatar.cc/150?u=f" alt="Avatar" class="avatar-md">
+                <div class="item-info">
+                  <h4>Pooja Singh</h4>
+                  <p>PCOD</p>
+                </div>
+                <div class="status-badge improving-light">Improving</div>
+              </div>
+            </div>
+            <div class="bottom-nav">
+              <div class="nav-item"><i class="fa-solid fa-house"></i><span>Home</span></div>
+              <div class="nav-item"><i class="fa-solid fa-phone"></i><span>Calls</span></div>
+              <div class="nav-item active"><i class="fa-solid fa-users"></i><span>Patients</span></div>
+              <div class="nav-item"><i class="fa-solid fa-robot"></i><span>AI Notes</span></div>
+              <div class="nav-item"><i class="fa-solid fa-bars"></i><span>More</span></div>
+            </div>
+          </div>
+
+          <!-- 7. Patient Profile Overview -->
+          <div class="screen" id="patient-profile">
+            <div class="app-header">
+              <div class="header-content">
+                <i class="fa-solid fa-arrow-left"></i>
+                <h2>Rohit Sharma</h2>
+                <i class="fa-solid fa-pen"></i>
+              </div>
+            </div>
+            <div class="screen-content scrollable">
+              <div class="profile-header-horizontal">
+                <img src="https://i.pravatar.cc/150?u=a" alt="Avatar" class="avatar-lg">
+                <div class="profile-details">
+                  <h3>Rohit Sharma</h3>
+                  <p>+91 98765 43210</p>
+                  <p class="text-xs text-muted">Age: 32 | Male</p>
+                </div>
+              </div>
+              
+              <div class="status-banner improving-bg mt-4">
+                <div class="status-badge improving-pill mb-2"><span class="dot-small yellow"></span> Improving</div>
+                <h4>Chronic Migraine</h4>
+                <p>Condition improving. Continue medication.</p>
+              </div>
+
+              <div class="action-grid-6 mt-4">
+                <div class="action-btn-square">
+                  <div class="icon-box text-blue"><i class="fa-solid fa-list-check"></i></div>
+                  <span>Timeline</span>
+                </div>
+                <div class="action-btn-square">
+                  <div class="icon-box text-blue"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
+                  <span>Prescriptions</span>
+                </div>
+                <div class="action-btn-square">
+                  <div class="icon-box text-blue"><i class="fa-solid fa-file-medical"></i></div>
+                  <span>Notes</span>
+                </div>
+                <div class="action-btn-square">
+                  <div class="icon-box text-blue"><i class="fa-solid fa-chart-line"></i></div>
+                  <span>Reports</span>
+                </div>
+                <div class="action-btn-square">
+                  <div class="icon-box text-blue"><i class="fa-solid fa-robot"></i></div>
+                  <span>AI Summary</span>
+                </div>
+                <div class="action-btn-square">
+                  <div class="icon-box text-blue"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                  <span>Call History</span>
+                </div>
+              </div>
+
+              <div class="info-list mt-6">
+                <div class="info-row">
+                  <span class="text-muted">Last Visit</span>
+                  <span class="fw-500">12 Apr 2024</span>
+                </div>
+                <div class="divider"></div>
+                <div class="info-row">
+                  <span class="text-muted">Last Update</span>
+                  <span class="fw-500">4 Days Ago</span>
+                </div>
+                <div class="divider"></div>
+                <div class="info-row">
+                  <span class="text-muted">Next Follow-up</span>
+                  <span class="fw-500">13 May 2024</span>
+                </div>
+                <div class="divider"></div>
+                <div class="info-row">
+                  <span class="text-muted">Consultation Valid Till</span>
+                  <span class="fw-600 text-dark">10 May 2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Detailed Patient Timeline -->
+          <div class="screen" id="timeline">
+            <div class="app-header">
+              <div class="header-content">
+                <i class="fa-solid fa-arrow-left"></i>
+                <h2>Rohit Sharma</h2>
+                <i class="fa-solid fa-pen"></i>
+              </div>
+              <div class="line-tabs mt-3">
+                <div class="tab active">Timeline</div>
+                <div class="tab">Notes</div>
+                <div class="tab">Prescriptions</div>
+                <div class="tab">Reports</div>
+              </div>
+            </div>
+            <div class="screen-content scrollable">
+              <div class="timeline mt-4">
+                
+                <div class="timeline-item">
+                  <div class="timeline-dot bg-green"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-date">10 May 2024 <span class="text-muted">(Today)</span></div>
+                    <p class="timeline-desc">Mild headache only in stress. Overall improvement.</p>
+                    <div class="fw-600 mt-2">Improvement: 80%</div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot bg-green"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-date">04 May 2024 <span class="text-muted">(Call)</span></div>
+                    <p class="timeline-desc">Headache very rare now. Feeling better overall.</p>
+                    <div class="fw-600 mt-2">Improvement: 60%</div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot bg-yellow"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-date">28 Apr 2024 <span class="text-muted">(Call Update)</span></div>
+                    <p class="timeline-desc">Headache much better. Mild dizziness sometimes.</p>
+                    <p class="timeline-med mt-2">Medicine: Natrum Mur 1M<br>Single dose</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot bg-yellow"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-date">22 Apr 2024 <span class="text-muted">(Follow-up Call)</span></div>
+                    <p class="timeline-desc">Headache reduced. Sleep slightly better. Nausea reduced.</p>
+                    <p class="mt-2 text-sm text-dark">Continue same medicine</p>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot bg-red"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-date">12 Apr 2024 <span class="text-muted">(Last Visit)</span></div>
+                    <p class="timeline-desc">Severe headache, sleep disturbance, irritability, nausea.</p>
+                    <p class="timeline-med mt-2">Medicine: Natrum Mur 200<br>1 dose weekly</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Data Entry (Add/Update Patient) -->
+          <div class="screen" id="add-patient">
+            <div class="app-header">
+              <div class="header-content">
+                <div class="flex-align">
+                  <i class="fa-solid fa-arrow-left mr-3"></i>
+                  <h2>Add / Update Record</h2>
+                </div>
+                <div class="fab-small bg-green"><i class="fa-solid fa-check text-white"></i></div>
+              </div>
+            </div>
+            <div class="screen-content scrollable bg-white">
+              <h4 class="text-blue text-sm fw-600 mb-4">General Information</h4>
+              
+              <div class="form-group border-bottom pb-2">
+                <label>Name</label>
+                <div class="flex-align">
+                  <i class="fa-solid fa-user text-muted mr-2"></i>
+                  <input type="text" value="Rohit Sharma" class="form-input-clean">
+                </div>
+              </div>
+
+              <div class="form-row border-bottom pb-2 pt-2">
+                <div class="form-group flex-1">
+                  <label>Age</label>
+                  <input type="text" value="32" class="form-input-clean">
+                </div>
+                <div class="form-group flex-1 border-left pl-3">
+                  <label>Gender</label>
+                  <input type="text" value="Male" class="form-input-clean">
+                </div>
+              </div>
+
+              <div class="form-group border-bottom pb-2 pt-2">
+                <label>Phone Number</label>
+                <div class="flex-align">
+                  <i class="fa-solid fa-phone text-muted mr-2"></i>
+                  <input type="text" value="+91 98765 43210" class="form-input-clean">
+                </div>
+              </div>
+
+              <div class="form-group border-bottom pb-2 pt-4">
+                <label>Health Issue / Complaint</label>
+                <input type="text" value="Chronic Migraine" class="form-input-clean text-dark fw-500">
+              </div>
+
+              <div class="form-group border-bottom pb-2 pt-2">
+                <label>Since When?</label>
+                <input type="text" value="6 Months" class="form-input-clean">
+              </div>
+
+              <div class="form-group border-bottom pb-2 pt-2">
+                <label>Symptoms</label>
+                <textarea rows="2" class="form-input-clean">Headache, nausea, irritability, sleep disturbance</textarea>
+              </div>
+
+              <div class="form-group border-bottom pb-2 pt-2">
+                <label>Medicine Currently Taking</label>
+                <input type="text" value="Natrum Mur 200" class="form-input-clean">
+              </div>
+
+              <div class="form-group border-bottom pb-2 pt-2">
+                <label>Allergies (if any)</label>
+                <input type="text" value="None" class="form-input-clean">
+              </div>
+
+              <div class="form-group pb-2 pt-2">
+                <label>Notes</label>
+                <textarea rows="2" class="form-input-clean">Patient is sensitive to noise.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. AI Call Transcription & Summary -->
+          <div class="screen" id="ai-notes">
+            <div class="app-header">
+              <div class="header-content">
+                <div class="flex-align">
+                  <i class="fa-solid fa-arrow-left mr-3"></i>
+                  <h2>AI Call Notes</h2>
+                </div>
+                <span class="text-xs text-muted">Call Duration: 03:18</span>
+              </div>
+              <div class="flex-align mt-4 mb-2">
+                <img src="https://i.pravatar.cc/150?u=a" alt="Avatar" class="avatar-sm mr-3">
+                <div>
+                  <h4 class="text-sm fw-600">Call with Rohit Sharma</h4>
+                  <p class="text-xs text-muted">10 May 2024, 10:30 AM</p>
+                </div>
+              </div>
+              <div class="line-tabs mt-3">
+                <div class="tab active">Transcript</div>
+                <div class="tab">Summary</div>
+                <div class="tab">Analysis</div>
+              </div>
+            </div>
+            <div class="screen-content scrollable">
+              
+              <div class="transcript-box mt-2">
+                <div class="t-line"><span class="t-speaker">Rohit:</span> Sir, headache is much better now.</div>
+                <div class="t-line"><span class="t-speaker">Doctor:</span> How about sleep?</div>
+                <div class="t-line"><span class="t-speaker">Rohit:</span> Sleep is improved. Only sometimes<br>headache in stress.</div>
+                <div class="t-line"><span class="t-speaker">Doctor:</span> Any nausea or vomiting?</div>
+                <div class="t-line"><span class="t-speaker">Rohit:</span> No nausea now.</div>
+                <div class="t-line"><span class="t-speaker">Doctor:</span> Good. Continue medicine.</div>
+                <div class="t-line"><span class="t-speaker">Rohit:</span> Okay doctor.</div>
+              </div>
+
+              <h4 class="text-sm text-green fw-600 mt-6 mb-3">AI Summary</h4>
+              <ul class="ai-check-list">
+                <li><i class="fa-solid fa-check-circle text-green"></i> Headache frequency reduced significantly</li>
+                <li><i class="fa-solid fa-check-circle text-green"></i> Sleep improved</li>
+                <li><i class="fa-solid fa-check-circle text-green"></i> Nausea resolved</li>
+                <li><i class="fa-solid fa-check-circle text-green"></i> Mild headache only in stress</li>
+              </ul>
+
+              <h4 class="text-sm text-blue fw-600 mt-6 mb-2">Suggested Status Update</h4>
+              <div class="status-banner improving-bg flex-center py-3 rounded-lg mb-6">
+                <span class="dot-small yellow mr-2"></span> Improving (60% → 80%)
+              </div>
+
+              <div class="flex-row gap-3">
+                <button class="btn-outline-blue flex-1 py-3 rounded-lg fw-600">Edit & Save</button>
+                <button class="btn-green-solid flex-1 py-3 rounded-lg fw-600">Save to Record</button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- 11. Reminders & Alerts -->
+          <div class="screen" id="reminders">
+            <div class="app-header">
+              <div class="header-content">
+                <h2>Reminders</h2>
+                <i class="fa-solid fa-bars"></i>
+              </div>
+              <div class="pill-tabs mt-3">
+                <div class="pill active">All</div>
+                <div class="pill">Follow-up</div>
+                <div class="pill">Fees</div>
+                <div class="pill">Other</div>
+              </div>
+            </div>
+            <div class="screen-content scrollable">
+              
+              <div class="alert-card danger-light border-red">
+                <div class="flex-between mb-2">
+                  <div class="flex-align text-red fw-600 text-sm">
+                    <i class="fa-solid fa-clock-rotate-left mr-2"></i> Consultation Expired
+                  </div>
+                  <span class="text-red text-xs fw-600">Today</span>
+                </div>
+                <h4 class="fw-600 text-sm">Rohit Sharma</h4>
+                <p class="text-xs mt-1">Consultation validity expired on<br>10 May 2024</p>
+              </div>
+
+              <div class="alert-card warning-light border-yellow">
+                <div class="flex-between mb-2">
+                  <div class="flex-align text-yellow-dark fw-600 text-sm">
+                    <i class="fa-solid fa-calendar-check mr-2"></i> Follow-up Due Tomorrow
+                  </div>
+                  <span class="text-yellow-dark text-xs fw-600">Tomorrow</span>
+                </div>
+                <h4 class="fw-600 text-sm">Amit Kumar</h4>
+                <p class="text-xs mt-1">Next follow-up on 13 May 2024</p>
+              </div>
+
+              <div class="alert-card info-light border-blue">
+                <div class="flex-between mb-2">
+                  <div class="flex-align text-blue fw-600 text-sm">
+                    <i class="fa-solid fa-indian-rupee-sign mr-2"></i> Fees Reminder
+                  </div>
+                  <span class="text-blue text-xs fw-600">2 Days</span>
+                </div>
+                <h4 class="fw-600 text-sm">Neha Verma</h4>
+                <p class="text-xs mt-1">Fees pending from last visit</p>
+              </div>
+
+              <div class="alert-card success-light border-green">
+                <div class="flex-between mb-2">
+                  <div class="flex-align text-green fw-600 text-sm">
+                    <i class="fa-solid fa-calendar-check mr-2"></i> Follow-up Due
+                  </div>
+                  <span class="text-green text-xs fw-600">7 Days</span>
+                </div>
+                <h4 class="fw-600 text-sm">Sunita Devi</h4>
+                <p class="text-xs mt-1">Next follow-up on 20 May 2024</p>
+              </div>
+
+              <div class="text-center mt-6">
+                <a href="#" class="text-blue text-sm fw-600">View All Reminders</a>
+              </div>
+
+            </div>
+            <div class="bottom-nav">
+              <div class="nav-item"><i class="fa-solid fa-house"></i><span>Home</span></div>
+              <div class="nav-item"><i class="fa-solid fa-phone"></i><span>Calls</span></div>
+              <div class="nav-item"><i class="fa-solid fa-users"></i><span>Patients</span></div>
+              <div class="nav-item"><i class="fa-solid fa-robot"></i><span>AI Notes</span></div>
+              <div class="nav-item"><i class="fa-solid fa-bars"></i><span>More</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

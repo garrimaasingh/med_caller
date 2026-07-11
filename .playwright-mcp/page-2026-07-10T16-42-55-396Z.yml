@@ -1,0 +1,12 @@
+- generic [ref=e3]:
+  - generic [ref=e9]:
+    - heading "MedCaller" [level=1] [ref=e10]
+    - paragraph [ref=e11]: Clinical Admin Portal
+  - generic [ref=e12]:
+    - generic [ref=e13]:
+      - generic [ref=e14]: Email
+      - textbox "admin@medcaller.com" [ref=e15]
+    - generic [ref=e16]:
+      - generic [ref=e17]: Password
+      - textbox "Enter password" [ref=e18]
+    - button "Sign In" [ref=e19] [cursor=pointer]
